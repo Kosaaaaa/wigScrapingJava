@@ -67,4 +67,16 @@ public class Share {
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
+
+    @Override
+    public String toString() {
+        return "Share{" +
+                "symbol='" + symbol + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", changePercent=" + changePercent +
+                ", volume=" + volume +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
