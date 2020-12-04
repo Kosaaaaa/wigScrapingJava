@@ -47,13 +47,18 @@ public class Scraper {
             Share share = new Share();
             String tableText = tableRow.text();
             String[] tableValues = tableText.split(" ");
-            share.setSymbol(tableValues[0]);
-            share.setName(tableValues[1]);
-            share.setPrice(Double.parseDouble(tableValues[2]));
-            share.setChangePercent(Double.parseDouble(tableValues[3].replace("%", "")));
-            share.setVolume(reformatNumber(tableValues[5]));
-            share.setTimestamp(getDatetime(tableValues[6]));
-            shares.add(share);
+            try {
+                share.setSymbol(tableValues[0]);
+                share.setName(tableValues[1]);
+                share.setPrice(Double.parseDouble(tableValues[2]));
+                share.setChangePercent(Double.parseDouble(tableValues[3].replace("%", "")));
+                share.setVolume(reformatNumber(tableValues[5]));
+                share.setTimestamp(getDatetime(tableValues[6]));
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(ConsoleColors.ANSI_YELLOW + tableValues[1] + " Share data is not fully updated." + ConsoleColors.ANSI_RESET);
+            } finally {
+                shares.add(share);
+            }
 
         }
         return shares;
