@@ -1,17 +1,17 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import java.io.IOException;
-
 public class WebsiteDownloader {
-    private String url;
+    private final String url;
     private Document doc;
 
     public WebsiteDownloader(String url) {
-        try{
+        this.url = url;
+        try {
             this.doc = Jsoup.connect(url).get();
-        }catch (IOException e){
-            System.out.println("Website could not be downloaded");
+        } catch (Exception e) {
+            System.out.println(ConsoleColors.ANSI_RED + "Website could not be resolved");
+            System.out.println(ConsoleColors.ANSI_RED + e);
         }
     }
 
@@ -19,7 +19,7 @@ public class WebsiteDownloader {
         return doc;
     }
 
-    public void setDoc(Document doc) {
-        this.doc = doc;
+    public String getUrl() {
+        return url;
     }
 }
