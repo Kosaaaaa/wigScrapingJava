@@ -26,7 +26,7 @@ public class TextFileProcessor {
 
     public void writeLines(List<String> lines) {
         try {
-            FileWriter writer = new FileWriter(this.filename);
+            FileWriter writer = new FileWriter(this.filename, true);
 
             for (String line : lines) {
                 writer.write(line + "\n");
