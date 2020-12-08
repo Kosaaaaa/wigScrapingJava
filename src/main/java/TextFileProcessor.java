@@ -17,10 +17,10 @@ public class TextFileProcessor {
             if (file.createNewFile()) {
                 System.out.println(ConsoleColors.ANSI_GREEN + "File created: " + file.getName() + ConsoleColors.ANSI_RESET);
             } else {
-                System.out.println(ConsoleColors.ANSI_YELLOW + "File already exists." + ConsoleColors.ANSI_RESET);
+                System.out.println(ConsoleColors.ANSI_YELLOW + file.getName() + " file already exists." + ConsoleColors.ANSI_RESET);
             }
         } catch (IOException e) {
-            System.out.println(ConsoleColors.ANSI_RED + "An error occurred while creating file." + ConsoleColors.ANSI_RESET);
+            System.out.println(ConsoleColors.ANSI_RED + "An error occurred while creating text file." + ConsoleColors.ANSI_RESET);
         }
     }
 
@@ -33,9 +33,9 @@ public class TextFileProcessor {
             }
 
             writer.close();
-            System.out.println(ConsoleColors.ANSI_GREEN + "Successfully wrote to the file." + ConsoleColors.ANSI_RESET);
+            System.out.println(ConsoleColors.ANSI_GREEN + "Successfully wrote to the text file." + ConsoleColors.ANSI_RESET);
         } catch (IOException e) {
-            System.out.println(ConsoleColors.ANSI_RED + "An error occurred while writing to file." + ConsoleColors.ANSI_RESET);
+            System.out.println(ConsoleColors.ANSI_RED + "An error occurred while writing to text file." + ConsoleColors.ANSI_RESET);
         }
     }
 }
