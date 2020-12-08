@@ -7,16 +7,21 @@ public class Main {
         WebsiteDownloader website = getWebsite(URL);
         Scraper scraper = new Scraper(website.getDoc());
         List<Share> shares = scraper.getShares();
-        List<String> sharesLines = new ArrayList<>();
-        TextFileProcessor fileProcessor = new TextFileProcessor("stocks.txt");
         for (Share share : shares){
             System.out.println(share.toString());
-            sharesLines.add(share.toString());
         }
-        fileProcessor.writeLines(sharesLines);
+        saveInTextFile(shares);
     }
 
     public static WebsiteDownloader getWebsite(String URL) {
         return new WebsiteDownloader(URL);
+    }
+    public static void saveInTextFile(List<Share> shares){
+        List<String> sharesLines = new ArrayList<>();
+        for (Share share : shares){
+            sharesLines.add(share.toString());
+        }
+        TextFileProcessor textFileProcessor = new TextFileProcessor("stocks.txt");
+        textFileProcessor.writeLines(sharesLines);
     }
 }
