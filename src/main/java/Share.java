@@ -44,6 +44,30 @@ public class Share {
         this.timestamp = timestamp;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public double getChangePercent() {
+        return changePercent;
+    }
+
+    public double getVolume() {
+        return volume;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
     @Override
     public String toString() {
         return "Share{" +
