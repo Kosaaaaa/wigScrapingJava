@@ -15,6 +15,7 @@ public class Main {
         System.out.println(ConsoleColors.ANSI_YELLOW + "Where to save shares data?: " + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "1. Text file" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "2. Excel file" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_PURPLE + "3. Both" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "0. Quit" + ConsoleColors.ANSI_RESET);
         Scanner inp = new Scanner(System.in);
 
@@ -33,6 +34,10 @@ public class Main {
                 saveInTextFile(shares);
                 break;
             case 2:
+                saveInExcelFile(shares);
+                break;
+            case 3:
+                saveInTextFile(shares);
                 saveInExcelFile(shares);
                 break;
         }
