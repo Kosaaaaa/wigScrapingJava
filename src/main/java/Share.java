@@ -13,15 +13,6 @@ public class Share {
     public Share() {
     }
 
-    public Share(String symbol, String name, double price, double changePercent, double volume, Date timestamp) {
-        this.symbol = symbol;
-        this.name = name;
-        this.price = price;
-        this.changePercent = changePercent;
-        this.volume = volume;
-        this.timestamp = timestamp;
-    }
-
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
