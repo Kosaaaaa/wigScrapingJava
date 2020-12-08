@@ -1,3 +1,5 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Share {
@@ -64,8 +66,9 @@ public class Share {
         return volume;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public String getTimestampString() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd kk:mm");
+        return dateFormat.format(this.timestamp);
     }
 
     @Override
