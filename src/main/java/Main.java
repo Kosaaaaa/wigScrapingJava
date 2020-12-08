@@ -8,7 +8,7 @@ public class Main {
         Scraper scraper = new Scraper(website.getDoc());
         List<Share> shares = scraper.getShares();
         List<String> sharesLines = new ArrayList<>();
-        FileProcessor fileProcessor = new FileProcessor("stocks.txt");
+        TextFileProcessor fileProcessor = new TextFileProcessor("stocks.txt");
         for (Share share : shares){
             System.out.println(share.toString());
             sharesLines.add(share.toString());

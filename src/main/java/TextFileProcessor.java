@@ -3,10 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class FileProcessor {
+public class TextFileProcessor {
     private final String filename;
 
-    public FileProcessor(String filename) {
+    public TextFileProcessor(String filename) {
         this.filename = filename;
         createFile();
     }
