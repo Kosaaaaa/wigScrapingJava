@@ -49,7 +49,7 @@ public class Main {
 
     public static void saveInExcelFile(List<Share> shares) {
         ExcelFileProcessor excelFileProcessor = new ExcelFileProcessor("stocks.xlsx");
-        excelFileProcessor.writeLines(shares);
+        excelFileProcessor.appendToSpreadsheet(shares);
     }
 
     public static void saveInTextFile(List<Share> shares) {
