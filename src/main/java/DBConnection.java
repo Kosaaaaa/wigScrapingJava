@@ -3,13 +3,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class DBConnection {
-    private static String dbhost = "jdbc:mysql://localhost:3306/wig_stocks";
-    private static String username = "root";
-    private static String password = "";
+    private final static String dbhost = "jdbc:mysql://localhost:3306/wig_stocks";
+    private final static String username = "root";
+    private final static String password = "";
     private static Connection conn;
 
     public static Connection createNewConnection() {
-        try  {
+        try {
             conn = DriverManager.getConnection(dbhost, username, password);
             System.out.println("Connected successfully.");
             return conn;
@@ -37,4 +37,14 @@ public class DBConnection {
         stmtInsert.executeBatch();
         conn.commit();
     }
+
+    public static Boolean authUser(Connection conn, String username, String password) throws SQLException {
+        String sqlSelect = "SELECT COUNT(*) as result FROM users WHERE username=? and password=?";
+        PreparedStatement stmtSelect = conn.prepareStatement(sqlSelect);
+        stmtSelect.setString(1, username);
+        stmtSelect.setString(2, password);
+        ResultSet results = stmtSelect.executeQuery();
+        return results.next() && results.getInt("result") == 1;
+    }
+
 }

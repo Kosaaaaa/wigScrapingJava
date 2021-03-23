@@ -75,11 +75,28 @@ public class Main {
     public static void saveInDatabase(List<Share> shares) {
         Connection conn = DBConnection.createNewConnection();
         try {
-            DBConnection.addShares(conn, shares);
-            System.out.println(ConsoleColors.ANSI_GREEN + "Added: " + shares.size() + " shares to database.");
+            System.out.println("Username: ");
+            Scanner inp = new Scanner(System.in);
+            String username = inp.nextLine();
+            System.out.println("Password: ");
+            String password = inp.nextLine();
+            Boolean isAuth = DBConnection.authUser(conn, username, password);
+            if (isAuth) {
+                System.out.println(ConsoleColors.ANSI_GREEN + "User correct");
+                try {
+                    DBConnection.addShares(conn, shares);
+                    System.out.println(ConsoleColors.ANSI_GREEN + "Added: " + shares.size() + " shares to database.");
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+            else {
+                System.out.println(ConsoleColors.ANSI_RED + "Wrong user");
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
 
     }
 }
