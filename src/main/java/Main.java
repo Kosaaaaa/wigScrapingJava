@@ -1,3 +1,5 @@
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -5,6 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        long startTime = System.nanoTime();
         String URL = "https://stooq.pl/t/?i=582";
         WebsiteDownloader website = getWebsite(URL);
         Scraper scraper = new Scraper(website.getDoc());
@@ -12,10 +15,15 @@ public class Main {
         for (Share share : shares) {
             System.out.println(share.toString());
         }
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime);
+        double durationTimeInSeconds = (double) duration / 1_000_000_000;
+        System.out.println(ConsoleColors.ANSI_GREEN + "Shares data downloaded in: " + durationTimeInSeconds + " seconds.");
         System.out.println(ConsoleColors.ANSI_YELLOW + "Where to save shares data?: " + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "1. Text file" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "2. Excel file" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "3. Both" + ConsoleColors.ANSI_RESET);
+        System.out.println(ConsoleColors.ANSI_PURPLE + "4. Database" + ConsoleColors.ANSI_RESET);
         System.out.println(ConsoleColors.ANSI_PURPLE + "0. Quit" + ConsoleColors.ANSI_RESET);
         Scanner inp = new Scanner(System.in);
 
@@ -40,6 +48,9 @@ public class Main {
                 saveInTextFile(shares);
                 saveInExcelFile(shares);
                 break;
+            case 4:
+                saveInDatabase(shares);
+                break;
         }
     }
 
@@ -59,5 +70,16 @@ public class Main {
         }
         TextFileProcessor textFileProcessor = new TextFileProcessor("stocks.txt");
         textFileProcessor.writeLines(sharesLines);
+    }
+
+    public static void saveInDatabase(List<Share> shares) {
+        Connection conn = DBConnection.createNewConnection();
+        try {
+            DBConnection.addShares(conn, shares);
+            System.out.println(ConsoleColors.ANSI_GREEN + "Added: " + shares.size() + " shares to database.");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }
